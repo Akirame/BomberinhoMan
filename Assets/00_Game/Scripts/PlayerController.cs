@@ -7,12 +7,22 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10;
     public float rotationSpeed = 10;
-    public float angle;    
+    public float angle;
+    public GameObject Bomb;
+    private Vector3 vBombCentered;
 
-
+    private void Start()
+    {
+        vBombCentered = Vector3.zero;
+    }
     void Update()
     {
         movementAndRotation();
+        vBombCentered = CenterBombGrid();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(Bomb, vBombCentered, Bomb.transform.rotation);
+        }
     }
 
     float GetRealAngle(Vector3 from, Vector3 to)
@@ -52,5 +62,9 @@ public class PlayerController : MonoBehaviour
             angle = newAngleY;
             transform.rotation = newRotation;
         }
+    }
+    Vector3 CenterBombGrid()
+    {
+        return new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.transform.position.z));
     }
 }
