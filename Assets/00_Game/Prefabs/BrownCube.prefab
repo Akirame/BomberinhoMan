@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 65879153232051674}
   - component: {fileID: 23372948945525586}
   m_Layer: 0
-  m_Name: brownCube
+  m_Name: BrownCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
