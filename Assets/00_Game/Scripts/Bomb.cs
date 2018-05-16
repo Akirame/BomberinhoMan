@@ -6,21 +6,56 @@ public class Bomb : MonoBehaviour {
 
     public GameObject explosionPrefab;
     public LayerMask levelMask;
+    public GameObject BombCollider;
+    private bool exploded;
 
-    void Start()
+    private void Start()
     {        
-        Invoke("Explode", 3f);
+        exploded = false;
+        Invoke("Explode", 3f);        
     }
 
-    void Explode()
+    public void Explode()
     {
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<SphereCollider>().enabled = false;
-        Destroy(this.gameObject, 3f);
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            calculateExplosion(Vector3.forward);
+            calculateExplosion(Vector3.back);
+            calculateExplosion(Vector3.right);
+            calculateExplosion(Vector3.left);
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<SphereCollider>().enabled = false;
+            BombCollider.SetActive(false);
+            exploded = true;
+            Destroy(this.gameObject, 3f);        
+    }
+    private void calculateExplosion(Vector3 direction)
+    {
+        bool touched = false;
+
+        for (int i = 1; i < 2; i++)
+        {            
+            RaycastHit hit;
+            Physics.Raycast(transform.position, direction, out hit, i, levelMask);
+            if (!hit.collider && !touched)
+            {
+                if(explosionPrefab)
+                Instantiate(explosionPrefab, transform.position + (i * direction), Quaternion.identity);                
+            }
+            else
+                touched = true;            
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!exploded && other.gameObject.tag == "Explosion")
+        {
+            CancelInvoke("Explode");
+            Explode();
+        }
     }
     private void OnTriggerExit(Collider other)
     {
-        GetComponent<SphereCollider>().isTrigger = false;
+        BombCollider.SetActive(true);
     }
 }

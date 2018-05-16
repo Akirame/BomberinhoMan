@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     {
         vBombCentered = Vector3.zero;
     }
-    void Update()
+    private void Update()
     {
         movementAndRotation();
         vBombCentered = CenterBombGrid();
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    float GetRealAngle(Vector3 from, Vector3 to)
+    private float GetRealAngle(Vector3 from, Vector3 to)
     {
         Vector3 right = Vector3.right;
 
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
         return angleBtw;
     }
-    void movementAndRotation()
+    private void movementAndRotation()
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -66,5 +66,13 @@ public class PlayerController : MonoBehaviour
     Vector3 CenterBombGrid()
     {
         return new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.transform.position.z));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Explosion")
+            Debug.Log("HOLA");
+        if (collision.gameObject.tag == "Explosion")
+            Debug.Log("HOLA");
     }
 }
