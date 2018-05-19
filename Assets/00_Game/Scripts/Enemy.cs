@@ -1,0 +1,133 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+enum EnemyState {
+    Idle,
+    ChooseDir,
+    Moving,
+}
+enum directions {
+    Left,
+    Right,
+    Up,
+    Down,
+}
+public class Enemy : MonoBehaviour {
+
+
+    public float speed = 5;
+
+    private LayerMask levelMask;
+    private EnemyState state;
+    private directions dir;
+    private Rigidbody rBody;
+    private float timer;
+    
+    private void Start()
+    {
+        levelMask = (1 << 8 | 1 << 9);
+        state = EnemyState.Idle;
+        rBody = GetComponent<Rigidbody>();
+        timer = 0;
+    }
+            
+    private void Update()
+    {        
+        switch (state)
+        {
+            case EnemyState.Idle:
+                rBody.velocity = Vector3.zero;
+                transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), transform.position.y, Mathf.RoundToInt(transform.position.z));
+                state = EnemyState.ChooseDir;
+                break;
+            case EnemyState.ChooseDir:                
+                switch (Random.Range(0, 3))
+                {
+                    case 0:
+                        if (calculateDir(Vector3.forward))
+                        {
+                            dir = directions.Up;
+                            state = EnemyState.Moving;
+                        }
+                        else
+                            state = EnemyState.ChooseDir;
+                            break;
+                    case 1:
+                        if (calculateDir(Vector3.back))
+                        {
+                            dir = directions.Down;
+                            state = EnemyState.Moving;                        
+                        }
+                        else
+                            state = EnemyState.ChooseDir;
+                        break;
+                    case 2:
+                        if (calculateDir(Vector3.right))
+                        {
+                            dir = directions.Right;
+                            state = EnemyState.Moving;
+                        }
+                        else
+                            state = EnemyState.ChooseDir;
+                        break;
+                    case 3:
+                        if (calculateDir(Vector3.left))
+                        {
+                            dir = directions.Left;
+                            state = EnemyState.Moving;
+                        }                        
+                        else
+                            state = EnemyState.ChooseDir;
+                        break;
+                }                
+                break;
+            case (EnemyState.Moving):
+                TimerCount();
+                switch (dir)
+                {
+                    case directions.Up:
+                        rBody.velocity = Vector3.forward;
+                        break;
+                    case directions.Down:
+                        rBody.velocity = Vector3.back;
+                        break;
+                    case directions.Right:
+                        rBody.velocity = Vector3.right;
+                        break;
+                    case directions.Left:
+                        rBody.velocity = Vector3.left;
+                        break;
+                }
+                break;
+        }
+    }
+    private void TimerCount()
+    {
+        if (timer > 1)
+        {
+            if (state == EnemyState.Idle)
+            {
+                state = EnemyState.ChooseDir;
+            }
+            else if (state == EnemyState.Moving)
+                state = EnemyState.Idle;
+            timer = 0;
+        }
+        else
+            timer += Time.deltaTime;
+    }
+    private bool calculateDir(Vector3 direction)
+    {        
+            RaycastHit hit;
+            Physics.Raycast(transform.position, direction, out hit, 1, levelMask);
+        if (!hit.collider)
+        {
+            return true;
+        }
+        else
+            return false;
+        
+    }
+
+}

@@ -5,23 +5,43 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController instance;
+
     public float speed = 10;
     public float rotationSpeed = 10;
-    public float angle;
+    public float angle;    
     public GameObject Bomb;
+    private Vector3 startPos = new Vector3(12, 0.2f, 12);
     private Vector3 vBombCentered;
+    private GameObject bombGroup;
+
+    public static PlayerController Get()
+    {
+        return instance;
+    }
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+            Destroy(this.gameObject);
+    }
 
     private void Start()
     {
+        transform.position = startPos;
         vBombCentered = Vector3.zero;
+        InitBombGroup();
     }
     private void Update()
     {
         movementAndRotation();
         vBombCentered = CenterBombGrid();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Game.Get().BombCantOK())
         {
-            Instantiate(Bomb, vBombCentered, Bomb.transform.rotation);
+            Instantiate(Bomb, vBombCentered, Bomb.transform.rotation,GetBombGroupTransf());
         }
     }
 
@@ -61,18 +81,32 @@ public class PlayerController : MonoBehaviour
         {
             angle = newAngleY;
             transform.rotation = newRotation;
-        }
+        }        
     }
-    Vector3 CenterBombGrid()
+    private Vector3 CenterBombGrid()
     {
         return new Vector3(Mathf.RoundToInt(transform.position.x), 0, Mathf.RoundToInt(transform.transform.position.z));
-    }
-
+    }   
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Explosion")
-            Debug.Log("HOLA");
-        if (collision.gameObject.tag == "Explosion")
-            Debug.Log("HOLA");
+        if(collision.transform.tag == "Enemy1")        
+            OnDeath();        
+    }
+    private void InitBombGroup()
+    {
+        bombGroup = new GameObject();        
+        bombGroup.name = "Bombs";
+    }
+    public void OnDeath()
+    {
+        transform.position = startPos;
+        Game.Get().PlayerDeath();
+        Destroy(bombGroup);
+        InitBombGroup();
+        MapInstancer.Get().ResetMap();
+    }
+    public Transform GetBombGroupTransf()
+    {        
+        return bombGroup.transform;
     }
 }

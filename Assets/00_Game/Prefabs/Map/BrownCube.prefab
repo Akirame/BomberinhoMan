@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 33407125148351436}
   - component: {fileID: 65879153232051674}
   - component: {fileID: 23372948945525586}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BrownCube
-  m_TagString: Untagged
+  m_TagString: DestroyableWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: d821e5c66d43dcf4db3a1447f3aa99fa, type: 2}
   m_StaticBatchInfo:
