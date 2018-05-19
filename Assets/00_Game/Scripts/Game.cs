@@ -34,7 +34,7 @@ public class Game : MonoBehaviour {
     private void Update()
     {
         if (Health <= 0)
-            Debug.Log("HOLISWI");
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     public int GetBombRange()
@@ -51,14 +51,12 @@ public class Game : MonoBehaviour {
     public void BombCounterUP()
     {
         if (bombActualCant < bombMaxCant)
-            bombActualCant++;
-        Debug.Log(bombActualCant);
+            bombActualCant++;        
     }
     public void BombCounterDOWN()
     {
         if (bombActualCant > 0)
-            bombActualCant--;
-        Debug.Log(bombActualCant);
+            bombActualCant--;        
     }
     public void SetScore(int _score)
     {
