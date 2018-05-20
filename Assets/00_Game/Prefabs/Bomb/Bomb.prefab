@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114878204773929778}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 135930820980418088}
   m_Layer: 0
   m_Name: BombCollider
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,9 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 177540, guid: 69dfce71c987ee94ebd40421847e3c8e, type: 2}
-  levelMask:
-    serializedVersion: 2
-    m_Bits: 256
   BombCollider: {fileID: 1880959193035324}
   timerExplode: 3.02
 --- !u!135 &135455585297233574

@@ -157,6 +157,11 @@ Prefab:
       propertyPath: bombMaxCant
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114483907031650876, guid: 9e5d26db8405b8c4e9f35cc1450d3ae9,
+        type: 2}
+      propertyPath: cantEnemy
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e5d26db8405b8c4e9f35cc1450d3ae9, type: 2}
   m_IsPrefabParent: 0
@@ -235,8 +240,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 666893574}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12, y: 12, z: 11.98}
+  m_LocalRotation: {x: 0.52249855, y: 0, z: 0, w: 0.85264015}
+  m_LocalPosition: {x: 12, y: 8.2, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -301,6 +306,12 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 95eeda98d48818e429802314a1f94b3e,
+        type: 2}
+    - target: {fileID: 114997029945947364, guid: 5312ffff2e9207b49b38ac262c3e15b4,
+        type: 2}
+      propertyPath: Bomb
+      value: 
+      objectReference: {fileID: 1824459534578202, guid: d98074dd3b3aaf5498f33a2178c73b4f,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5312ffff2e9207b49b38ac262c3e15b4, type: 2}
@@ -402,7 +413,7 @@ MonoBehaviour:
   brownCube: {fileID: 1620856748124518, guid: aeb9c497c52262549892e6b371600ad6, type: 2}
   enemyPrefab: {fileID: 1891766818889294, guid: 2e8b06d5f3cb2c243b98869e2a5ad7eb,
     type: 2}
-  CantEnemy: 5
+  door: {fileID: 1979444117359718, guid: caef7d8406332bc45a1000de4524267b, type: 2}
 --- !u!4 &1470745802
 Transform:
   m_ObjectHideFlags: 0

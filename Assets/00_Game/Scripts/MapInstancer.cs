@@ -10,8 +10,10 @@ public class MapInstancer : MonoBehaviour
     public GameObject wall;
     public GameObject brownCube;
     public GameObject enemyPrefab;
-    public int CantEnemy = 1;
+    public GameObject door;
     private GameObject cubesGroup;
+    private GameObject brownCubesGroup;
+    private GameObject whiteCubesGroup;
     private GameObject enemiesGroup;
     private int[,] mapMatrix;
 
@@ -50,11 +52,10 @@ public class MapInstancer : MonoBehaviour
     }
     /// <summary>
     /// Darle valor a la matriz dependiendo del tipo de bloque a instanciar
-    /// <para>0:Libre
-    /// 1:Cubo Blanco
-    /// 2:Cubo Marron
-    /// 3:Player
-    /// </para>
+    /// <para>0: Libre</para>
+    /// <para>1: Cubo Blanco</para>
+    /// <para>2: Cubo Marron</para>
+    /// <para>3: Player</para>
     /// </summary>
     private void SetMatrix()
     {
@@ -90,19 +91,23 @@ public class MapInstancer : MonoBehaviour
     /// </summary>
     private void InstantiateOnMatrix()
     {
+        int randomX = 0;
+        int randomZ = 0;
+        //Cubos
         for (int i = 0; i < mapMatrix.GetLength(0); i++)
             for (int j = 0; j < mapMatrix.GetLength(1); j++)
             {
                 if (mapMatrix[i, j] == 1)
-                    Instantiate(whiteCube, new Vector3(i * 1, 0, j * 1), Quaternion.identity, cubesGroup.transform);
+                    Instantiate(whiteCube, new Vector3(i * 1, 0, j * 1), Quaternion.identity, whiteCubesGroup.transform);
                 else
                 if (mapMatrix[i, j] == 2)
-                    Instantiate(brownCube, new Vector3(i * 1, 0, j * 1), Quaternion.identity, cubesGroup.transform);
+                    Instantiate(brownCube, new Vector3(i * 1, 0, j * 1), Quaternion.identity, brownCubesGroup.transform);
             }
-        for (int i = 0; i < CantEnemy; i++)
+        // Enemigos
+        for (int i = 0; i < Game.Get().GetCantEnemy(); i++)
         {
-            int randomX = (Random.Range(0, mapMatrix.GetLength(0)));
-            int randomZ = (Random.Range(0, mapMatrix.GetLength(1)));
+             randomX = (Random.Range(0, mapMatrix.GetLength(0)));
+             randomZ = (Random.Range(0, mapMatrix.GetLength(1)));
             while (mapMatrix[randomX, randomZ] != 0 && mapMatrix[randomX, randomZ] != 3)
             {
                 randomX = (Random.Range(0, mapMatrix.GetLength(0)));
@@ -110,7 +115,19 @@ public class MapInstancer : MonoBehaviour
             }
                 Instantiate(enemyPrefab, new Vector3( randomX * 1, 0,randomZ * 1), Quaternion.identity,enemiesGroup.transform);            
         }
+        //Puerta
+        randomX = (Random.Range(0, mapMatrix.GetLength(0)));
+        randomZ= (Random.Range(0, mapMatrix.GetLength(1)));
+        while (mapMatrix[randomX, randomZ] != 2)
+        {
+            randomX = (Random.Range(0, mapMatrix.GetLength(0)));
+            randomZ = (Random.Range(0, mapMatrix.GetLength(1)));
+        }
+        Instantiate(door, new Vector3(randomX * 1, -0.5f, randomZ * 1), door.transform.rotation,cubesGroup.transform);
     }
+    /// <summary>
+    /// Instanciacion de los grupos para mantener orden dentro del MapInstancer
+    /// </summary>
     private void InitGroups()
     {
         cubesGroup = new GameObject();
@@ -119,7 +136,16 @@ public class MapInstancer : MonoBehaviour
         enemiesGroup = new GameObject();
         enemiesGroup.transform.parent = transform;
         enemiesGroup.name = "Enemies";
+        brownCubesGroup = new GameObject();
+        brownCubesGroup.transform.parent = cubesGroup.transform;
+        brownCubesGroup.name = "BrownCubes";
+        whiteCubesGroup = new GameObject();
+        whiteCubesGroup.transform.parent = cubesGroup.transform;
+        whiteCubesGroup.name = "WhiteCubes";
     }
+    /// <summary>
+    /// Re-Instanciacion del mapa y los enemigos
+    /// </summary>
     public void ResetMap()
     {
         Destroy(cubesGroup.gameObject);
