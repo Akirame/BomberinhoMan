@@ -100,7 +100,7 @@ public class Game : MonoBehaviour {
     public void EnemyDeath()
     {
         enemyActualCant--;
-    }
+    }    
     /// <summary>
     /// Devuelve true si la cantidad de enemigos es 0
     /// </summary>

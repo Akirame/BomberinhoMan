@@ -24,11 +24,10 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == ("Explosion"))
-        {
-            Debug.Log("HOLA");
+        {            
             reveal = true;
         }
-        if (other.gameObject.tag == "Player" && reveal)
+        if (other.gameObject.tag == "Player" && Game.Get().DoorOpen())
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }

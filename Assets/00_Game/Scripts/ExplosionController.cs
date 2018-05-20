@@ -16,7 +16,10 @@ public class ExplosionController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "DestroyableWall")
+        {
             Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        }
         if (other.gameObject.tag == "Enemy1")
         {
             Destroy(other.gameObject);
@@ -29,7 +32,7 @@ public class ExplosionController : MonoBehaviour
         }
         if (other.gameObject.tag == "PowerUp")
         {
-            Destroy(this.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

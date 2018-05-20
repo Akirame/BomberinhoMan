@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
     
     private void Start()
     {
-        levelMask = (1 << 8 | 1 << 9);
+        levelMask = (1 << 8 | 1 << 9 | 1 << 10);
         state = EnemyState.Idle;
         rBody = GetComponent<Rigidbody>();
         timer = 0;        
