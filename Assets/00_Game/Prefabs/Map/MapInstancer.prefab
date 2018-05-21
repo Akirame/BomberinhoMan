@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1278947575101420}
+  m_IsPrefabParent: 1
+--- !u!1 &1278947575101420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4134901301802322}
+  - component: {fileID: 114619934771269038}
+  m_Layer: 0
+  m_Name: MapInstancer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4134901301802322
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278947575101420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.005157, y: -9.5493965, z: -1.71875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114619934771269038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278947575101420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb56a6a1aa3f1a842962b2c37d7feafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whiteCube: {fileID: 1586400398180758, guid: 6ae856e8817a3f4429b106c508ec094c, type: 2}
+  wall: {fileID: 1474659609012170, guid: 2c81c6fa13182cf40a62b101180eed49, type: 2}
+  brownCube: {fileID: 1620856748124518, guid: aeb9c497c52262549892e6b371600ad6, type: 2}
+  enemyPrefab1: {fileID: 1891766818889294, guid: 2e8b06d5f3cb2c243b98869e2a5ad7eb,
+    type: 2}
+  enemyPrefab2: {fileID: 1903192046942188, guid: 995feaf83f7219947b9899075711070e,
+    type: 2}
+  door: {fileID: 1979444117359718, guid: caef7d8406332bc45a1000de4524267b, type: 2}

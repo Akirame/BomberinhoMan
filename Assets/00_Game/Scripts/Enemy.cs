@@ -18,15 +18,14 @@ public class Enemy : MonoBehaviour {
 
     public float speed = 5;
 
-    private LayerMask levelMask;
+    public LayerMask levelMask;
     private EnemyState state;
     private directions dir;
     private Rigidbody rBody;
     private float timer;
     
     private void Start()
-    {
-        levelMask = (1 << 8 | 1 << 9 | 1 << 10);
+    {        
         state = EnemyState.Idle;
         rBody = GetComponent<Rigidbody>();
         timer = 0;        

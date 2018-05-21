@@ -5,7 +5,10 @@ using UnityEngine;
 public class Game : MonoBehaviour {
 
     private static Game instance;
-
+    public GameObject map;
+    public GameObject player;
+    public GameObject gameUI;
+    public GameObject finalUI;
     public int bombRange = 2;
     public int bombMaxCant = 1;
     public int cantEnemy = 1;
@@ -13,8 +16,10 @@ public class Game : MonoBehaviour {
     private int initialBombCant;
     private int initialRange;
     private int Health;
-    private int Score = 0;
+    private int Score;
     private int enemyActualCant;
+    private int enemiesKilled;
+    private float totalTimer;
 
     public static Game Get()
     {
@@ -33,6 +38,9 @@ public class Game : MonoBehaviour {
     private void Start()
     {
         Health = 2;
+        Score = 0;
+        enemiesKilled = 0;
+        totalTimer = 0;
         initialRange = bombRange;
         initialBombCant = bombMaxCant;
         bombActualCant = bombMaxCant;
@@ -40,18 +48,17 @@ public class Game : MonoBehaviour {
     }
     private void Update()
     {
+        totalTimer += Time.deltaTime;
         if (Health <= 0)
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);       
+        {
+            EndGame();
+        }    
     }
 
     public void HealthPlusPLus()
     {
         Health++;        
-    }
-    public int GetBombRange()
-    {
-        return bombRange;
-    }
+    }    
     /// <summary>
     /// Si se puede activar una bomba devuelve true
     /// </summary>
@@ -92,14 +99,12 @@ public class Game : MonoBehaviour {
         bombMaxCant = initialBombCant;
         bombActualCant = bombMaxCant;
         bombRange = initialRange;
-    }
-    public int GetCantEnemy()
-    {
-        return cantEnemy;
+        enemiesKilled = 0;
     }
     public void EnemyDeath()
     {
         enemyActualCant--;
+        enemiesKilled++;        
     }    
     /// <summary>
     /// Devuelve true si la cantidad de enemigos es 0
@@ -112,4 +117,44 @@ public class Game : MonoBehaviour {
         else
             return false;
     }
+    public void EndGame()
+    {
+        map.SetActive(false);
+        player.SetActive(false);
+        gameUI.SetActive(false);
+        finalUI.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    public int GetCantEnemy()
+    {
+        return cantEnemy;
+    }
+    public int GetBombRange()
+    {
+        return bombRange;
+    }
+    public int GetTime()
+    {
+
+        int timer = Mathf.RoundToInt(totalTimer);
+        return timer;
+    }
+    public int GetBombCant()
+    {
+        return bombMaxCant;
+    }
+    public int GetHealth()
+    {
+        return Health;
+    }
+    public int GetScore()
+    {        
+        return Score;
+    }
+    public int GetEnemiesKilled()
+    {        
+        return enemiesKilled;
+    }
+
 }
