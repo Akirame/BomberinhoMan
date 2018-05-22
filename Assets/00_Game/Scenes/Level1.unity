@@ -575,7 +575,7 @@ Prefab:
     - target: {fileID: 114483907031650876, guid: 9e5d26db8405b8c4e9f35cc1450d3ae9,
         type: 2}
       propertyPath: cantEnemy
-      value: 2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1683951733373858, guid: 9e5d26db8405b8c4e9f35cc1450d3ae9, type: 2}
       propertyPath: m_IsActive
