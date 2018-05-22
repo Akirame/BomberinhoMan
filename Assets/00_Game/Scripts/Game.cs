@@ -64,7 +64,7 @@ public class Game : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     public bool BombCantOK()
-    {
+    {        
         if (bombActualCant != 0)
             return true;
         else
